@@ -1,0 +1,102 @@
+managed implementation in class zbp_r_dt_incident_lgl unique;
+strict ( 2 );
+with draft;
+
+define behavior for z_r_dt_incident_lgl alias Incident
+persistent table zdt_incident_lgl
+draft table zdt_d_incid_lgl
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global, instance )
+
+{
+  create;
+  update;
+  delete;
+
+  association _History { create ( features : instance ); with draft; }
+
+  field ( readonly )
+  IncUUID,
+  IncidentID,
+  Status,
+  ChangedDate,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( numbering : managed )
+  IncUUID;
+
+  field ( mandatory )
+  title,
+  Description,
+  Priority;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zdt_incident_lgl
+    {
+      IncUUID            = inc_uuid;
+      IncidentID         = incident_id;
+      Title              = title;
+      Description        = description;
+      Status             = status;
+      Priority           = priority;
+      CreationDate       = creation_date;
+      ChangedDate        = changed_date;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
+
+define behavior for zdd_incident_h_lgl alias History
+implementation in class zbp_dd_incident_h_lgl unique
+persistent table zdt_incidt_h_lgl
+draft table zdt_d_inc_h_lgl
+lock dependent by _Incident
+authorization dependent by _Incident
+
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  association _Incident { with draft; }
+
+  field ( numbering : managed )
+  HisUUID;
+
+  field ( readonly )
+  HisUUID,
+  IncUUID,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  mapping for zdt_incidt_h_lgl
+    {
+      HisUUID            = his_uuid;
+      IncUUID            = inc_uuid;
+      HisID              = his_id;
+      PreviousStatus     = previous_status;
+      NewStatus          = new_status;
+      Text               = text;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

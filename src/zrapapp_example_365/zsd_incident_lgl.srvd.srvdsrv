@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition - Incidents'
+define service zsd_incident_lgl {
+  expose z_c_incident_lgl;
+  expose z_c_incident_h_lgl;
+}

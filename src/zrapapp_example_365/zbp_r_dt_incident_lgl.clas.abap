@@ -1,0 +1,5 @@
+CLASS zbp_r_dt_incident_lgl DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF z_r_dt_incident_lgl.
+ENDCLASS.
+
+CLASS zbp_r_dt_incident_lgl IMPLEMENTATION.
+ENDCLASS.

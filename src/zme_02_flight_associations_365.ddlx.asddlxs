@@ -1,0 +1,13 @@
+@Metadata.layer: #LOCALIZATION
+annotate entity zdd_02_flight_associations_365 with
+{
+  @UI.dataPoint.description: 'MDE - LOCALIZATION / Description / Carrid'
+  @UI.dataPoint.title: 'MDE - LOCALIZATION / Title / Carrid'
+  @EndUserText: { label: 'Airline ID',
+                  quickInfo: 'Airline Company Code' }
+  CarrierId;
+
+  @UI.dataPoint.description: 'MDE - LOCALIZATION / Description / Connidd'
+  @UI.dataPoint.title: 'MDE - LOCALIZATION / Title / Connid'
+  ConnectionId;
+}
